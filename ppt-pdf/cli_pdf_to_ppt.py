@@ -11,7 +11,7 @@ class PdfToPpt(object):
     def __init__(self, pdf_file=None, ppt_file=None):
         self.pdf_file = pdf_file
         self.ppt_file = pdf_file.replace('.pdf', '.pptx')
-	self.total_pages = 1
+        self.total_pages = 1
         self.log = Logger.defaults('PdfToPptx')
         self.log.debug('%s \n %s' % (self.pdf_file, self.ppt_file))
 
