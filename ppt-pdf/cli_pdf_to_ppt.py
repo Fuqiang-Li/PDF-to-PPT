@@ -93,7 +93,7 @@ class PdfToPpt(object):
 
     def pdf_splitter(self):
         self.log.info('Called pdf_splitter')
-        input_pdf = PdfFileReader(file(self.pdf_file, 'rb'))
+        input_pdf = PdfFileReader(file(self.pdf_file, 'rb'), strict=False)
         self.total_pages = input_pdf.numPages
 
         for page_number in range(self.total_pages):
