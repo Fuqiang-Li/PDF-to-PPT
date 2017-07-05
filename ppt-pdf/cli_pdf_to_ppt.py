@@ -1,6 +1,7 @@
 import os
 import sys
 import PythonMagick
+import shutil
 from pptx import Presentation
 from pptx.util import Inches
 from PyPDF2 import PdfFileWriter, PdfFileReader
@@ -9,10 +10,25 @@ from logger import Logger
 
 class PdfToPpt(object):
     def __init__(self, pdf_file=None, ppt_file=None):
+        self.filename = os.path.basename(pdf_file).split('.')[0]
+        self.output_dir = self.filename + '_out_dir'
+
+        if os.path.exists(self.output_dir):
+            input_var = raw_input(self.output_dir + " exists! Do you want to clear it to continue? (Y/N): ")
+            if input_var.lower() != 'y':
+                raise Exception('Output directory not available!')
+
+            if not os.path.isdir(self.output_dir):
+                os.remove(self.output_dir)
+            else:
+                shutil.rmtree(self.output_dir)
+        
+        os.mkdir(self.output_dir)
+
         self.pdf_file = pdf_file
-        self.ppt_file = pdf_file.replace('.pdf', '.pptx')
+        self.ppt_file = os.path.join(self.output_dir, self.filename + '.pptx')
         self.total_pages = 1
-        self.log = Logger.defaults('PdfToPptx')
+        self.log = Logger.defaults('PdfToPptx', os.path.join(self.output_dir, 'out.log'))
         self.log.debug('%s \n %s' % (self.pdf_file, self.ppt_file))
 
     def check_file_exist(self, file_path):
@@ -48,8 +64,7 @@ class PdfToPpt(object):
             output = PdfFileWriter()
             output.addPage(input_pdf.getPage(page_number))
             # new filename
-            new_pdf = '_%s%s' % (str(page_number+1), '.pdf')
-            new_pdf = self.pdf_file.replace('.pdf', new_pdf)
+            new_pdf = os.path.join(self.output_dir, self.filename + '_%s%s' % (str(page_number+1), '.pdf'))
             file_stream = file(new_pdf, 'wb')
             output.write(file_stream)
             file_stream.close()
@@ -62,7 +77,7 @@ class PdfToPpt(object):
         prs = Presentation()
         try:
             for slide_number in range(self.total_pages):
-                img_path = self.pdf_file.replace('.pdf', '_%s%s' % (str(slide_number+1), '.jpg'))
+                img_path = os.path.join(self.output_dir, self.filename + '_%s%s' % (str(slide_number+1), '.jpg'))
                 self.log.debug('%s' % img_path)
                 new_slide = prs.slide_layouts[0]
                 slide = prs.slides.add_slide(new_slide)
