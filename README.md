@@ -1,5 +1,11 @@
 # pdf to pptx using python
-This is an folk from vijayanandrp/PDF-to-PPT. Added support for generating greyscale, black and white, and color inversed pptx. Also added support for generating pptx using only regions provided to crop the original pdf pages.
+This is an folk from vijayanandrp/PDF-to-PPT.  
+Extended with following supports to generate pptx:
+- in greyscale
+- in black and white
+- in inversed color 
+- based on cropped regions, which is useful when converting pdf with multi-slides in a single page
+
 Written in PYTHON 2.7
 Tested in ubuntu 16 (Linux)
 
@@ -18,24 +24,23 @@ python   cli_pdf_to_ppt.py   a.pdf
 output file will be created as a.pptx in the same location
 
 ## More details:
-python cli_pdf_to_ppt.py [-h] [-g] [-b]
-                         [-t]
-                         [-i] [-c CROP [CROP ...]]
-                         pdf_file
+python cli_pdf_to_ppt.py [-h] [-g] [-b]  
+.........................[-t]  
+.........................[-i] [-c CROP [CROP ...]]  
+.........................pdf_file  
                          
 convert PDF to pptx
 
-positional arguments:
-  pdf_file              path to the pdf file
+positional arguments:  
+&nbsp;&nbsp;pdf_file              path to the pdf file
 
 optional arguments:
-  -h, --help            show this help message and exit
-  -g, --greyscale       generate greyscale pptx
-  -b, --blackwhite      generate black and white pptx
-  -t, --threshold       the threshold value [0,255) for converting black and white
-  -i, --invert          invert generated pptx color
-  -c CROP [CROP ...], --crop CROP [CROP ...]
-                        values specifing region(s) in pixel to crop
+&nbsp;&nbsp;-h, --help            show this help message and exit  
+&nbsp;&nbsp;-g, --greyscale       generate greyscale pptx  
+&nbsp;&nbsp;-b, --blackwhite      generate black and white pptx  
+&nbsp;&nbsp;-t, --threshold       the threshold value [0,255) for converting black and white  
+&nbsp;&nbsp;-i, --invert          invert generated pptx color  
+&nbsp;&nbsp;-c CROP [CROP ...], --crop CROP [CROP ...]    values specifing region(s) in pixel to crop  
 
 For example:
 ```
