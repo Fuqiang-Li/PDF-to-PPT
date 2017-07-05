@@ -1,5 +1,5 @@
 # pdf to pptx using python
-
+This is an folk from vijayanandrp/PDF-to-PPT. Added support for generating greyscale, black and white, and color inversed pptx. Also added support for generating pptx using only regions provided to crop the original pdf pages.
 Written in PYTHON 2.7
 Tested in ubuntu 16 (Linux)
 
@@ -23,7 +23,7 @@ python cli_pdf_to_ppt.py [-h] [-g] [-b]
                          [-i] [-c CROP [CROP ...]]
                          pdf_file
                          
-onvert PDF to pptx
+convert PDF to pptx
 
 positional arguments:
   pdf_file              path to the pdf file
@@ -39,5 +39,5 @@ optional arguments:
 
 For example:
 ```
-python cli_pdf_to_ppt.py 10.pdf -b -i -c '328,361,1326,1109' '328,1231,1326,1979' -t 50
+python cli_pdf_to_ppt.py a.pdf -b -i -c '328,361,1326,1109' '328,1231,1326,1979' -t 50
 ```
